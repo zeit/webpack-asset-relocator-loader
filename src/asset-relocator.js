@@ -331,7 +331,7 @@ module.exports = async function (content, map) {
         this.emitFile(assetBase(options) + name, source);
       }
     });
-    return "__dirname + '/" + relAssetPath(this, options) + JSON.stringify(name).slice(1, -1) + "'";
+    return "(typeof ASSET_RELOCATOR_BASE_DIR === 'undefined' ? __dirname : ASSET_RELOCATOR_BASE_DIR) + '/" + relAssetPath(this, options) + JSON.stringify(name).slice(1, -1) + "'";
   };
   const emitAssetDirectory = (wildcardPath, wildcards) => {
     const wildcardIndex = wildcardPath.indexOf(WILDCARD);
@@ -403,7 +403,7 @@ module.exports = async function (content, map) {
         assetExpressions += " + \'" + JSON.stringify(curPattern).slice(1, -1) + "'";
       }
     }
-    return "__dirname + '/" + relAssetPath(this, options) + JSON.stringify(name + firstPrefix).slice(1, -1) + "'" + assetExpressions;
+    return "(typeof ASSET_RELOCATOR_BASE_DIR === 'undefined' ? __dirname : ASSET_RELOCATOR_BASE_DIR) + '/" + relAssetPath(this, options) + JSON.stringify(name + firstPrefix).slice(1, -1) + "'" + assetExpressions;
   };
 
   let assetEmissionPromises = Promise.resolve();
